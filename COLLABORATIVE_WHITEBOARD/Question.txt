@@ -1,0 +1,46 @@
+1. How would you set up a real-time WebSocket connection in a React component for collaborative editing?
+
+To set up a real-time WebSocket connection in a React component, you can use the WebSocket API or a library
+like Socket.io. This connection enables continuous communication between the client and server. When the 
+React component mounts, the WebSocket connection is initialized, allowing real-time updates from the server, 
+such as whiteboard edits. The connection is cleaned up when the component unmounts. This ensures that multiple 
+users can interact in real time, sharing their edits seamlessly.
+
+2. Describe how to implement drawing functionality on an HTML5 canvas using React.
+
+Drawing functionality on an HTML5 canvas can be implemented by handling user events such as mouse movements or 
+touch gestures. The canvas allows users to draw lines and shapes, which can be implemented by tracking the user’s 
+pointer position and rendering it in real-time. The user’s interaction is captured through event listeners like 
+onMouseDown, onMouseMove, and onMouseUp, enabling continuous drawing as long as the user’s input is detected.
+
+3. How can you synchronize the state of the canvas across multiple users in real-time?
+
+To synchronize the canvas state across multiple users, the drawing actions are transmitted through the WebSocket 
+connection to the server. Whenever a user performs a drawing action, such as moving the mouse or adding new shapes, 
+these actions are sent to the server, which broadcasts them to all connected users. This ensures that all users see 
+the same updates in real time, creating a synchronized experience where everyone collaborates on the same canvas.
+
+4. Explain how you would handle and display the list of active users.
+
+The list of active users can be handled by having the server maintain a record of connected clients. When a new user 
+connects or disconnects, the server sends updates to all users, allowing the client to update its list of active users. 
+This list can be displayed in a dedicated section of the interface, showing users who are currently online and participating 
+in the collaboration.
+
+5. What measures would you take to ensure the scalability and performance of the real-time collaborative whiteboard?
+
+To ensure scalability and performance, several key measures can be applied:
+Efficient WebSocket Management: Use a robust WebSocket server that supports a large number of concurrent users, such as Socket.io, 
+and implement horizontal scaling using technologies like Redis for session management.
+
+Data Optimization: Optimize the data being sent through WebSockets by minimizing the payload and batching updates where 
+possible to avoid overwhelming the server.
+
+Event Throttling/Debouncing: Throttle or debounce events like drawing actions to reduce the frequency of updates, 
+especially during high-volume interactions.
+
+Load Balancing: Use load balancers to distribute WebSocket traffic evenly across multiple servers, ensuring the system 
+can handle a large number of users without bottlenecks.
+
+State Persistence: Use efficient memory storage solutions such as Redis to maintain the state of the canvas for all users, 
+enabling smooth experiences even when users join later or reconnect.
